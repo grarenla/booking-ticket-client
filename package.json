@@ -3,18 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-path angularapp  --aot --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.1.1",
     "@angular/cdk": "^8.1.0",
+    "@angular/cli": "^8.3.20",
     "@angular/common": "^8.1.1",
     "@angular/compiler": "^8.1.1",
+    "@angular/compiler-cli": "^8.2.14",
     "@angular/core": "^8.1.1",
     "@angular/flex-layout": "^8.0.0-beta.26",
     "@angular/forms": "^8.1.1",
@@ -25,17 +27,20 @@
     "@angular/router": "^8.1.1",
     "@swimlane/ngx-charts": "^12.0.1",
     "core-js": "^3.1.4",
+    "express": "^4.17.1",
     "moment": "^2.24.0",
     "ng-zorro-antd": "^8.0.3",
+    "path": "^0.12.7",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
     "tslib": "^1.10.0",
+    "typescript": "^3.4.5",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.801.1",
-    "@angular/cli": "^8.1.1",
-    "@angular/compiler-cli": "^8.1.1",
+    "@angular/cli": "^8.3.20",
+    "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^8.1.1",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "^2.0.6",
@@ -55,5 +60,9 @@
     "tslint": "^5.18.0",
     "typescript": "^3.4.5",
     "webpack": "^4.35.3"
+  },
+  "engines": {
+    "node": "v10.16.0",
+    "npm": "6.9.0"
   }
 }
