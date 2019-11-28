@@ -1,0 +1,71 @@
+<nz-spin [nzSpinning]="isLoading">
+    <nz-card>
+
+        <div nz-row nzGutter="6" class="mb-5 mt-5">
+            <div nz-col [nzSm]="24" [nzMd]="12" [nzLg]="6" class="mb-2">
+                <nz-select [nzPlaceHolder]="'Lọc theo trạng thái'"
+                           class="w-100"
+                           [(ngModel)]="params.status"
+                           (ngModelChange)="search()">
+
+                    <nz-option [nzValue]="option.key" [nzLabel]="option.value | translate"
+                               *ngFor="let option of orderStatusOptions"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <nz-table [nzData]="datas"
+                  [nzShowPagination]="false"
+                  nzSize="small"
+                  nzFrontPagination="false" [nzBordered]="true"
+                  [nzScroll]="{x: '800px'}">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Khách hàng</th>
+                <th>Lịch</th>
+                <th>Giá</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of datas; let i = index">
+                <td>{{i+1}}</td>
+                <td>
+                    {{data.customer?.name + ' - ' + data.customer?.phoneNumber}}
+                </td>
+                <td>
+<!--                    <a [routerLink]="['/' + eRouters.schedules, eRouters.edit]"-->
+<!--                       [queryParams]="{id: data.scheduleId}"-->
+<!--                    >-->
+<!--                        <span class="color-warning">{{(data.schedule?.driver?.name || 'K.Lái') }}</span>-->
+<!--                        &nbsp;| {{data.schedule?.voyage?.name}} |&nbsp;-->
+<!--                        <span class="color-danger">{{parseDate(data?.schedule?.startTime)}}</span>-->
+<!--                    </a>-->
+                    <span class="color-warning">{{(data.schedule?.driver?.name || 'K.Lái') }}</span>
+                    &nbsp;| {{data.schedule?.voyage?.name}} |&nbsp;
+                    <span class="color-danger">{{parseDate(data?.schedule?.startTime)}}</span>
+                </td>
+                <td>{{data.finalPrice.toLocaleString()}}</td>
+                <td [class.color-success]="data.status === orderStatus.Active"
+                    [class.color-danger]="data.status === orderStatus.Inactive"
+                >{{data.status === orderStatus.Active ? 'Thành công' : 'Hủy'}}</td>
+                <td>
+                    <ng-container>
+                        <a nz-button nzSize="small"
+                           class="mr-1 mb-1"
+                           [routerLink]="['/' + eRouters.orders, eRouters.edit]"
+                           [queryParams]="{id: data.id}"
+                        >
+                            <i nz-icon type="edit"></i>
+                        </a>
+                    </ng-container>
+                </td>
+            </tr>
+            </tbody>
+        </nz-table>
+
+    </nz-card>
+</nz-spin>
+
+
